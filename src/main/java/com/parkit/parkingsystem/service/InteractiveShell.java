@@ -23,10 +23,10 @@ public class InteractiveShell {
         TicketDAO ticketDAO = new TicketDAO();
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
 
-        while(continueApp) {
+        while (continueApp) {
             loadMenu();
             int option = inputReaderUtil.readSelection();
-            switch(option) {
+            switch (option) {
                 case 1: {
                     parkingService.processIncomingVehicle(new Date());
                     break;

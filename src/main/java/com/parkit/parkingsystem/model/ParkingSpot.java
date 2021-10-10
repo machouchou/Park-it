@@ -15,18 +15,34 @@ public class ParkingSpot {
         this.isAvailable = isAvailable;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getId() {
         return number;
     }
 
+    /**
+     * 
+     * @return
+     */
     public ParkingType getParkingType() {
         return parkingType;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isAvailable() {
         return isAvailable;
     }
 
+    /**
+     * 
+     * @param available
+     */
     public void setAvailable(boolean available) {
         isAvailable = available;
     }

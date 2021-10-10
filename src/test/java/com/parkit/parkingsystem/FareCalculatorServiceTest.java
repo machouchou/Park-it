@@ -18,16 +18,25 @@ public class FareCalculatorServiceTest {
     private static FareCalculatorService fareCalculatorService;
     private Ticket ticket;
 
+    /** create an object of FareCalculatorService.
+     * 
+     */
     @BeforeAll
     private static void setUp() {
         fareCalculatorService = new FareCalculatorService();
     }
 
+    /**
+     * 
+     */
     @BeforeEach
     private void setUpPerTest() {
         ticket = new Ticket();
     }
 
+    /** this method tests the calculate of the fare for one hour in parking for a car.
+     * 
+     */
     @Test
     public void calculateFareCar() {
         Date inTime = new Date();
@@ -42,6 +51,9 @@ public class FareCalculatorServiceTest {
         assertEquals(Fare.CAR_RATE_PER_HOUR, ticket.getPrice());
     }
 
+    /** this method tests the calculate of the fare for one hour in parking for a bike.
+     * 
+     */
     @Test
     public void calculateFareBike(){
         Date inTime = new Date();
@@ -56,12 +68,15 @@ public class FareCalculatorServiceTest {
         assertEquals(Fare.BIKE_RATE_PER_HOUR, ticket.getPrice());
     }
 
+    /** if the type of vehicle is unkown, we gets an exception.
+     * 
+     */
     @Test
     public void calculateFareUnkownType(){
         Date inTime = new Date();
         inTime.setTime( System.currentTimeMillis() - (  60 * 60 * 1000) );
         Date outTime = new Date();
-        ParkingSpot parkingSpot = new ParkingSpot(1, null,false);
+        ParkingSpot parkingSpot = new ParkingSpot(1, null, false);
 
         ticket.setInTime(inTime);
         ticket.setOutTime(outTime);
@@ -69,6 +84,9 @@ public class FareCalculatorServiceTest {
         assertThrows(NullPointerException.class, () -> fareCalculatorService.calculateFare(ticket));
     }
 
+    /** this test supposes enter time is after exit time.
+     * throws an exception
+     */
     @Test
     public void calculateFareBikeWithFutureInTime() {
         Date inTime = new Date();
@@ -82,6 +100,9 @@ public class FareCalculatorServiceTest {
         assertThrows(IllegalArgumentException.class, () -> fareCalculatorService.calculateFare(ticket));
     }
 
+    /** this method tests the calculate of the fare for less than an hour in parking for a bike.
+     * 
+     */
     @Test
     public void calculateFareBikeWithLessThanOneHourParkingTime(){
         Date inTime = new Date();
@@ -96,6 +117,9 @@ public class FareCalculatorServiceTest {
         assertEquals((0.75 * Fare.BIKE_RATE_PER_HOUR), ticket.getPrice() );
     }
 
+    /** this method tests the calculate of the fare for less than an hour in parking for a car.
+     * 
+     */
     @Test
     public void calculateFareCarWithLessThanOneHourParkingTime(){
         Date inTime = new Date();
@@ -112,6 +136,9 @@ public class FareCalculatorServiceTest {
         assertEquals(expectedPrice , ticket.getPrice());
     }
 
+    /** this method tests the calculate of the fare for more than a day in parking for a car.
+     * 
+     */
     @Test
     public void calculateFareCarWithMoreThanADayParkingTime(){
         Date inTime = new Date();
@@ -129,6 +156,9 @@ public class FareCalculatorServiceTest {
         assertEquals(expectedPrice , ticket.getPrice());
     }
     
+    /** in case exit time is null, the system throws an exception.
+     * 
+     */
     @Test
     public void calculateFareWithNullOutTimeReturnsIllegalArgumentException(){
         // Date inTime = new Date();
@@ -144,6 +174,9 @@ public class FareCalculatorServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {fareCalculatorService.calculateFare(ticket);});
     }
 
+    /** with an unknown type of vehicle, the test throws an exception.
+     * 
+     */
     @Test
     public void calculateFareWithDefaultReturnsIllegalArgumentException(){
         Date inTime = new Date();
@@ -159,6 +192,9 @@ public class FareCalculatorServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {fareCalculatorService.calculateFare(ticket);});
     }
     
+    /** this method tests the calculate of the fare for less than 30 minutes in parking for a bike.
+     * 
+     */
     @Test
     public void calculateFareBikeWithLessThan30Minutes(){
         Date inTime = new Date();
