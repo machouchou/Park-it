@@ -68,7 +68,7 @@ public class ParkingSpotDAO {
 
     /** this method updates the parking spot.
      * @param parkingSpot
-     * @return that one row is updated;
+     * @return a boolean that one row is updated;
      */
     public boolean updateParking(ParkingSpot parkingSpot) {
         //update the availability fo that parking slot

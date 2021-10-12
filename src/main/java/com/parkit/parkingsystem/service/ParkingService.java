@@ -34,7 +34,9 @@ public class ParkingService {
     }
 
     /**
-     * 
+     * this method processes the incoming vehicle, gets its reg number, allots it
+     * a parking slot and marks that this place is not available, generates a ticket
+     * with outTime = null and saves it in DB.
      * @param inTime
      */
     public void processIncomingVehicle(Date inTime) {
@@ -73,7 +75,7 @@ public class ParkingService {
     }
 
     /**
-     * 
+     * This method manages the availability of parking slots.
      * @return
      */
     public ParkingSpot getNextParkingNumberIfAvailable() {
@@ -96,7 +98,8 @@ public class ParkingService {
     }
 
     /**
-     * 
+     * This method gets the type of vehicle : if 1 means a car, if 2 means a bike,
+     * else the input is incorrect.
      * @return
      */
     private ParkingType getVehichleType() {
@@ -119,7 +122,8 @@ public class ParkingService {
     }
 
     /**
-     * 
+     * This method processes the vehicle exiting, calculates the fare service,
+     * updates the parking spot availability.
      * @param outTime
      */
     public void processExitingVehicle(Date outTime) {
